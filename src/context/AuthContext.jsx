@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { login, register } from "../api/v1";
 
 export const AuthContext = createContext();
@@ -10,6 +10,12 @@ export const AuthContextProvider = ({ children }) => {
         email: '',
         password: ''
     });
+
+    useEffect(() => {
+        const user = localStorage.getItem('User')
+
+        setUser(JSON.parse(user));
+    }, [])
 
     const updateAuthInfo = (info) => setAuthInfo(info);
 
