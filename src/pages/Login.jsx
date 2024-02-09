@@ -2,12 +2,12 @@ import { useContext } from "react"
 import { AuthContext } from "../context/AuthContext"
 
 export const Login = () => {
-    const { authInfo, updateAuthInfo } = useContext(AuthContext)
+    const { authInfo, updateAuthInfo, loginUser } = useContext(AuthContext)
 
     return (
         <div>
             <h1>Login</h1>
-            <form>
+            <form onSubmit={loginUser}>
             <label>Email</label>
                 <input type="email" onChange={e => updateAuthInfo({
                     ...authInfo,
