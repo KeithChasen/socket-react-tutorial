@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import { AuthContext } from "../context/AuthContext"
 
 export const NavBar = () => {
-    const { user } = useContext(AuthContext)
+    const { user, logoutUser } = useContext(AuthContext)
 
     return (
         <nav>
@@ -12,7 +12,7 @@ export const NavBar = () => {
                 {user ? 
                 <div>
                     <span>{user.email}</span>
-                    <button>Logout</button> 
+                    <button onClick={logoutUser}>Logout</button> 
                 </div>
                 : (
                     <div>
