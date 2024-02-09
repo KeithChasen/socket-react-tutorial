@@ -17,14 +17,17 @@ export const AuthContextProvider = ({ children }) => {
         setUser(JSON.parse(user));
     }, [])
 
+    const logoutUser = () => {
+        localStorage.removeItem('User');
+        setUser(null);
+    };
+
     const updateAuthInfo = (info) => setAuthInfo(info);
 
     const registerUser = async e => {
         e.preventDefault();
 
         const data = await register(authInfo);
-
-        console.log(data, 'register resp')
 
         if (data) {
             setUser(data);
@@ -37,22 +40,19 @@ export const AuthContextProvider = ({ children }) => {
 
         const data = await login(authInfo);
 
-        console.log(data, 'login resp')
-
         if (data) {
             setUser(data);
             localStorage.setItem('User', JSON.stringify(data));
         }
     }
 
-    console.log(authInfo, 'authInfo')
-
     return <AuthContext.Provider value={{
         user,
         authInfo,
         updateAuthInfo,
         registerUser,
-        loginUser
+        loginUser,
+        logoutUser
     }}>
         { children }
     </AuthContext.Provider>
